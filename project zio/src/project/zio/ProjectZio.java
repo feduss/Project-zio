@@ -24,7 +24,7 @@ public class ProjectZio {
         
     FileReader f=null;
     
-    String percorso="C:\\Users\\fedus\\Documents\\NetBeansProjects\\Project-zio\\project zio\\src\\project\\zio\lista.txt";
+    String percorso=null; //"C:\\Users\\fedus\\Documents\\NetBeansProjects\\Project-zio\\project zio\\src\\project\\zio\lista.txt";
     
     Scanner in = new Scanner(System.in);  //variabile di input, che rappresenta la tastiera
     
@@ -49,7 +49,7 @@ public class ProjectZio {
         b.readLine();
     }
     
-    System.out.println(b);
+    //System.out.println(b);
     
   }
     
