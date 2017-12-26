@@ -34,12 +34,12 @@ public class ProjectZio {
     
     Scanner in = new Scanner(System.in);  //variabile di input, che rappresenta la tastiera
     
-    System.out.println("Inserisci il percorso del file..Es.: c:/federico/lista.txt");
+    /*System.out.println("Inserisci il percorso del file..Es.: c:/federico/lista.txt");
     
-    percorso=in.nextLine(); //memorizzo il percorso file
+    percorso=in.nextLine(); //memorizzo il percorso file*/
     
     try { //Verifico se il file esista...
-            f=new FileReader(percorso);
+            f=new FileReader("./lista.txt");
             
         } catch (FileNotFoundException ex) {
             //Logger.getLogger(ProjectZio.class.getName()).log(Level.SEVERE, null, ex);
