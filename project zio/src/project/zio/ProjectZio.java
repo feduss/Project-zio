@@ -53,7 +53,7 @@ public class ProjectZio {
     String s=""; //stringa di buffer
     int numSoci=0;
     
-    System.out.println("Inserisci il numero dei soci: ");
+    System.out.println("Inserisci il numero massimo dei soci: ");
     numSoci=in.nextInt();
 
     Workbook wb = new HSSFWorkbook();  //creo file .xls mediante l'interfaccia Workbook, che è compatibile anche con gli .xlsx
@@ -65,7 +65,17 @@ public class ProjectZio {
     b.readLine(); //Salto la prima riga   
     
     //ciclo per la lettura di tutti i codici socio
-    for(int y=0; y<numSoci; y++){
+    for(int y=1; y<numSoci+1; y++){
+        
+        //Setto l'intestazione "Numero Socio"
+        Row rowMain = sheet1.createRow((short)0); //creo una riga in posizione 0
+        Cell cellMain = rowMain.createCell (0);
+        Cell cellMain1=rowMain.createCell(1);
+        Cell cellMain2=rowMain.createCell(2);
+        cellMain.setCellValue(createHelper.createRichTextString("Numero Socio"));
+        cellMain1.setCellValue(createHelper.createRichTextString("Volume Attuale"));
+        cellMain2.setCellValue(createHelper.createRichTextString("Data"));
+        
         b.skip(57); //Salto i dati che non mi servono
 
         //memorizzo il codice in una stringa di buffer
@@ -84,7 +94,7 @@ public class ProjectZio {
     b.readLine(); //salto una riga
     
     //ciclo per la lettura di VolumeAttuale e Data associata
-    for(int y=0; y<numSoci; y++){
+    for(int y=1; y<numSoci+1; y++){
         b.skip(33); //salto i caratteri inutili, sino ad arrivare ai volumi
         
         //memorizzo i volumi nella stringa s
@@ -94,6 +104,8 @@ public class ProjectZio {
         
         //Inserisco i volumi nella cella 1 di ogni riga
         Row a = sheet1.getRow(y); //estraggo la riga y-esima dal foglio creato prima
+
+        
         Cell cell1 = a.createCell (1); //creo una cella
         cell1.setCellValue(createHelper.createRichTextString(s)); //inserisco il valore di s nella cella
         s="";
@@ -117,6 +129,8 @@ public class ProjectZio {
     
     
     //Genero l'output
+    //System.out.println("Inserisci il percorso di salvataggio del file .xls (Es.: C:/Deskop/prova.xls");
+    //percorso=in.nextLine();
     FileOutputStream fileOut = new FileOutputStream("prova.xls");
     wb.write(fileOut);
     fileOut.close();
