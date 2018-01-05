@@ -21,6 +21,132 @@ import org.apache.poi.ss.usermodel.Workbook;
  * @author fedus
  */
 public class ProjectZio {
+
+    /**
+     * @return the f
+     */
+    public FileReader getF() {
+        return f;
+    }
+
+    /**
+     * @param f the f to set
+     */
+    public void setF(FileReader f) {
+        this.f = f;
+    }
+
+    /**
+     * @return the percorso
+     */
+    public String getPercorso() {
+        return percorso;
+    }
+
+    /**
+     * @param percorso the percorso to set
+     */
+    public void setPercorso(String percorso) {
+        this.percorso = percorso;
+    }
+
+    /**
+     * @return the in
+     */
+    public Scanner getIn() {
+        return in;
+    }
+
+    /**
+     * @param in the in to set
+     */
+    public void setIn(Scanner in) {
+        this.in = in;
+    }
+
+    /**
+     * @return the b
+     */
+    public BufferedReader getB() {
+        return b;
+    }
+
+    /**
+     * @param b the b to set
+     */
+    public void setB(BufferedReader b) {
+        this.b = b;
+    }
+
+    /**
+     * @return the s
+     */
+    public String getS() {
+        return s;
+    }
+
+    /**
+     * @param s the s to set
+     */
+    public void setS(String s) {
+        this.s = s;
+    }
+
+    /**
+     * @return the numSoci
+     */
+    public int getNumSoci() {
+        return numSoci;
+    }
+
+    /**
+     * @param numSoci the numSoci to set
+     */
+    public void setNumSoci(int numSoci) {
+        this.numSoci = numSoci;
+    }
+
+    /**
+     * @return the wb
+     */
+    public Workbook getWb() {
+        return wb;
+    }
+
+    /**
+     * @param wb the wb to set
+     */
+    public void setWb(Workbook wb) {
+        this.wb = wb;
+    }
+
+    /**
+     * @return the sheet1
+     */
+    public Sheet getSheet1() {
+        return sheet1;
+    }
+
+    /**
+     * @param sheet1 the sheet1 to set
+     */
+    public void setSheet1(Sheet sheet1) {
+        this.sheet1 = sheet1;
+    }
+
+    /**
+     * @return the createHelper
+     */
+    public CreationHelper getCreateHelper() {
+        return createHelper;
+    }
+
+    /**
+     * @param createHelper the createHelper to set
+     */
+    public void setCreateHelper(CreationHelper createHelper) {
+        this.createHelper = createHelper;
+    }
     
     /**
      * @param args the command line arguments
@@ -28,128 +154,128 @@ public class ProjectZio {
     
     /*attributi*/
     
-    FileReader f;
+    private FileReader f;
     
-    String percorso;
+    private String percorso;
     
-    Scanner in;  //variabile di input, che rappresenta la tastiera
+    private Scanner in;  //variabile di input, che rappresenta la tastiera
     
-    BufferedReader b;
+    private BufferedReader b;
     
-    String s; //stringa di buffer
-    int numSoci=0;
+    private String s; //stringa di buffer
+    private int numSoci=0;
     
-    Workbook wb;
+    private Workbook wb;
     
-    Sheet sheet1;
+    private Sheet sheet1;
     
-    CreationHelper createHelper;
+    private CreationHelper createHelper;
     
     /*Costruttori*/
     
-    ProjectZio(){
-        percorso="C:/Users/fedus/Desktop/lista.txt";
-        in = new Scanner(System.in);
-        s="";
+    public ProjectZio(){
+        setPercorso("C:/Users/fedus/Desktop/lista.txt");
+        setIn(new Scanner(System.in));
+        setS("");
         
         
         
-        wb = new HSSFWorkbook();  //creo file .xls mediante l'interfaccia Workbook, che è compatibile anche con gli .xlsx
-        sheet1= wb.createSheet("Nuovo Foglio"); //Creo un nuovo foglio excel
-        createHelper = wb.getCreationHelper(); //Otteniamo una istanza di CreationHelper del nostro Workbook
+        setWb(new HSSFWorkbook());  //creo file .xls mediante l'interfaccia Workbook, che è compatibile anche con gli .xlsx
+        setSheet1(wb.createSheet("Nuovo Foglio")); //Creo un nuovo foglio excel
+        setCreateHelper(wb.getCreationHelper()); //Otteniamo una istanza di CreationHelper del nostro Workbook
     }
     
     /*metodi*/
     
-    void VerificaFile(){
+    public void VerificaFile(){
         try { //Verifico se il file esista...
-            //f=new FileReader("./lista.txt"); //da decommentare nel jar finale
-            f=new FileReader(percorso); //DEBUG
+            //setF(new FileReader("./lista.txt")); //da decommentare nel jar finale
+            setF(new FileReader(getPercorso())); //DEBUG
             
         } catch (FileNotFoundException ex) {
             //Logger.getLogger(ProjectZio.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("File non trovato");
-            System.out.println(percorso);
+            System.out.println(getPercorso());
         }
         
-        b=new BufferedReader(f);
+        setB(new BufferedReader(getF()));
     }
     
-    void CodiciSocio() throws IOException{
+    public void CodiciSocio() throws IOException{
         
-        b.readLine(); //Salto la prima riga
+        getB().readLine(); //Salto la prima riga
         
         //ciclo per la lettura di tutti i codici socio
-        for(int y=1; y<numSoci+1; y++){
+        for(int y=1; y<getNumSoci()+1; y++){
 
             //Setto l'intestazione "Numero Socio"
-            Row rowMain = sheet1.createRow((short)0); //creo una riga in posizione 0
+            Row rowMain = getSheet1().createRow((short)0); //creo una riga in posizione 0
             Cell cellMain = rowMain.createCell (0);
             Cell cellMain1=rowMain.createCell(1);
             Cell cellMain2=rowMain.createCell(2);
-            cellMain.setCellValue(createHelper.createRichTextString("Numero Socio"));
-            cellMain1.setCellValue(createHelper.createRichTextString("Volume Attuale"));
-            cellMain2.setCellValue(createHelper.createRichTextString("Data"));
+            cellMain.setCellValue(getCreateHelper().createRichTextString("Numero Socio"));
+            cellMain1.setCellValue(getCreateHelper().createRichTextString("Volume Attuale"));
+            cellMain2.setCellValue(getCreateHelper().createRichTextString("Data"));
 
-            b.skip(57); //Salto i dati che non mi servono
+            getB().skip(57); //Salto i dati che non mi servono
 
             //memorizzo il codice in una stringa di buffer
             for(int i=0; i<=4; i++){
-                s=s+((char)b.read());
+                setS(getS() + ((char) getB().read()));
             }
 
-            Row row = sheet1.createRow((short)y); //creo una riga in posizione y-esima
+            Row row = getSheet1().createRow((short)y); //creo una riga in posizione y-esima
             Cell cell = row.createCell (0); //creo una cella
-            cell.setCellValue(createHelper.createRichTextString(s));
-            s="";
+            cell.setCellValue(getCreateHelper().createRichTextString(getS()));
+            setS("");
 
-            b.readLine(); //passo alla riga successiva
+            getB().readLine(); //passo alla riga successiva
         }
     }
     
-    void AltriDati() throws IOException{
-        b.readLine(); //salto una riga
+    public void AltriDati() throws IOException{
+        getB().readLine(); //salto una riga
     
         //ciclo per la lettura di VolumeAttuale e Data associata
-        for(int y=1; y<numSoci+1; y++){
-            b.skip(33); //salto i caratteri inutili, sino ad arrivare ai volumi
+        for(int y=1; y<getNumSoci()+1; y++){
+            getB().skip(33); //salto i caratteri inutili, sino ad arrivare ai volumi
 
             //memorizzo i volumi nella stringa s
             for(int i=0; i<=11; i++){
-                s=s+((char)b.read());
+                setS(getS() + ((char) getB().read()));
             }
 
             //Inserisco i volumi nella cella 1 di ogni riga
-            Row a = sheet1.getRow(y); //estraggo la riga y-esima dal foglio creato prima
+            Row a = getSheet1().getRow(y); //estraggo la riga y-esima dal foglio creato prima
 
 
             Cell cell1 = a.createCell (1); //creo una cella
-            cell1.setCellValue(createHelper.createRichTextString(s)); //inserisco il valore di s nella cella
-            s="";
+            cell1.setCellValue(getCreateHelper().createRichTextString(getS())); //inserisco il valore di s nella cella
+            setS("");
 
-            b.skip(25); //salto i caratteri inutili, sino ad arrivare alle date
+            getB().skip(25); //salto i caratteri inutili, sino ad arrivare alle date
 
             //memorizzo le date in una stringa s
             for(int i=0; i<=9; i++){
-                s=s+((char)b.read());
+                setS(getS() + ((char) getB().read()));
             }
 
             //Inserisco le date nella cella 2 di ogni riga
             Cell cell2 = a.createCell (2); //creo una cella
-            cell2.setCellValue(createHelper.createRichTextString(s)); //Inserisco il valore di s nella cella
-            s="";
+            cell2.setCellValue(getCreateHelper().createRichTextString(getS())); //Inserisco il valore di s nella cella
+            setS("");
 
-            b.readLine(); //passo alla riga successiva
+            getB().readLine(); //passo alla riga successiva
         }
     
     }
     
-    void GeneraOutput() throws FileNotFoundException, IOException{
+    public void GeneraOutput() throws FileNotFoundException, IOException{
         //Genero l'output
         //System.out.println("Inserisci il percorso di salvataggio del file .xls (Es.: C:/Deskop/prova.xls");
         //percorso=in.nextLine();
         FileOutputStream fileOut = new FileOutputStream("prova.xls");
-        wb.write(fileOut);
+        getWb().write(fileOut);
         fileOut.close();
     
     }
@@ -164,7 +290,7 @@ public class ProjectZio {
     ogg.VerificaFile(); //verifico la presenza del file lista 
     
     System.out.println("Inserisci il numero massimo dei soci: ");
-    ogg.numSoci=ogg.in.nextInt();
+    ogg.setNumSoci(ogg.getIn().nextInt());
     
     ogg.CodiciSocio(); //leggo i codici socio
     
