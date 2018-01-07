@@ -174,7 +174,7 @@ public class ProjectZio {
     /*Costruttori*/
     
     public ProjectZio(){
-        setPercorso("C:/Users/fedus/Desktop/lista.txt");
+        //setPercorso("C:/Users/fedus/Desktop/lista.txt");
         setIn(new Scanner(System.in));
         setS("");
         
@@ -188,17 +188,27 @@ public class ProjectZio {
     /*metodi*/
     
     public void VerificaFile(){
-        try { //Verifico se il file esista...
-            //setF(new FileReader("./lista.txt")); //da decommentare nel jar finale
-            setF(new FileReader(getPercorso())); //DEBUG
-            
-        } catch (FileNotFoundException ex) {
-            //Logger.getLogger(ProjectZio.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("File non trovato");
-            System.out.println(getPercorso());
-        }
+        Boolean flag=true;
+        do{
+            System.out.println("Inserisci il nome del file, compresa l'estensione (Es.: lista.txt)");
+            setPercorso(in.nextLine());            
+            try { //Verifico se il file esista...
+                setF(new FileReader("./"+percorso)); //da decommentare nel jar finale
+                flag=false;
+                setB(new BufferedReader(getF()));
+                //setF(new FileReader(getPercorso())); //DEBUG
+
+            } catch (FileNotFoundException ex) {
+                //Logger.getLogger(ProjectZio.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("File non trovato, reinserisci il nome");
+                //System.out.println(percorso);
+                flag=true;
+
+            }
+        }while(flag);
         
-        setB(new BufferedReader(getF()));
+        
+        
     }
     
     public void CodiciSocio() throws IOException{
@@ -271,10 +281,10 @@ public class ProjectZio {
     }
     
     public void GeneraOutput() throws FileNotFoundException, IOException{
-        //Genero l'output
-        //System.out.println("Inserisci il percorso di salvataggio del file .xls (Es.: C:/Deskop/prova.xls");
-        //percorso=in.nextLine();
-        FileOutputStream fileOut = new FileOutputStream("prova.xls");
+        setIn(new Scanner(System.in));
+        System.out.println("Inserisci il nome del file di output, SENZA estensione (Quella di default è .xls)");
+        setPercorso(in.nextLine()); 
+        FileOutputStream fileOut = new FileOutputStream(percorso+".xls");
         getWb().write(fileOut);
         fileOut.close();
     
